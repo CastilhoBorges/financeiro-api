@@ -8,4 +8,3 @@ export const DB_PORT = parseInt(process.env.DB_PORT || "5432", 10);
 export const DB_USER = process.env.DB_USER || "postgres";
 export const DB_PASS = process.env.DB_PASS || "12345678";
 export const DB_NAME = process.env.DB_NAME || "crux";
-export const CORS_ORIGIN = process.env.CORS_ORIGIN || "http://localhost:3000";
