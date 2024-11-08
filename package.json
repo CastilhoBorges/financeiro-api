@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "API para meu app de finanças",
   "type": "module",
-  "main": "index.js",
+  "main": "src/server.js",
   "scripts": {
     "start": "node ./src/app.js",
     "dev": "nodemon ./src/app.js",
@@ -20,6 +20,7 @@
   "author": "Augusto Castilho Borges",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "express": "^4.21.1",
     "pg": "^8.13.1",
     "pg-hstore": "^2.3.4",
