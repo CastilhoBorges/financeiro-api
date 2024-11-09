@@ -1,11 +1,11 @@
-import express from "express";
+import express, { urlencoded } from "express";
+import routes from "./routes/index.js";
 
 const app = express();
 
-app.get("/", (req, res) => {
-  res.send("Mo burro");
-});
+app.use(express.json());
+app.use(urlencoded({ extended: true }));
 
-app.listen(3000, () => {
-  console.log("Server is running on port 3000");
-});
+app.use("/api", routes);
+
+export default app;
