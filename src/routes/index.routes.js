@@ -1,10 +1,10 @@
 import { Router } from "express";
 import { helloWorld } from "./helloWorld.js";
-import { registerUser } from "./registerUser.js";
+import { createUser } from "./user.routes.js";
 
 const routes = Router();
 
 routes.use("/helloWorld", helloWorld);
-routes.use("/register", registerUser);
+routes.use("/register", createUser);
 
 export default routes;
