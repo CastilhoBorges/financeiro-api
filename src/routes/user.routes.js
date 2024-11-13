@@ -1,8 +1,10 @@
 import { ROUTER } from "../utils/router.constants.js";
-import { createUserController } from "../controllers/user.controller.js";
+import { userControllerCreate } from "../controllers/user.controller.js";
+import { userControllerLogin } from "../controllers/user.controller.js";
 
-const createUser = ROUTER;
+const user = ROUTER;
 
-createUser.post("/", createUserController);
+user.post("/register", userControllerCreate);
+user.post("/login", userControllerLogin);
 
-export { createUser };
+export { user };
