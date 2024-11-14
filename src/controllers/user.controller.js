@@ -11,6 +11,10 @@ export const userControllerCreate = async (req, res) => {
 };
 
 export const userControllerLogin = async (req, res) => {
-  const user = await userServiceLogin(req.body);
-  res.send("DEU CERTO NEGUIN");
+  try {
+    const login = await userServiceLogin(req.body);
+    res.send(login);
+  } catch (err) {
+    res.json({ error: err.message });
+  }
 };

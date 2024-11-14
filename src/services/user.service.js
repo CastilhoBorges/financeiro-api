@@ -22,7 +22,15 @@ export const userServiceCreate = async (userData) => {
   }
 };
 
-export const userServiceLogin = async (userData) => {
-  const { email, password } = userData;
-  
+export const userServiceLogin = async (login) => {
+  const { email, password } = login;
+  const data = await userRepositoryLogin(email);
+
+  if (data !== null) {
+    const userData = data.dataValues;
+    const isPassword = await bcrypt.compare(password, userData.password);
+
+  }
+
+  throw new Error("Email não cadastrado");
 };
