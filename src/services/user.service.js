@@ -1,6 +1,7 @@
 import bcrypt from "bcrypt";
 import { userRepositoryCreate } from "../respositories/user.repository.js";
 import { userRepositoryLogin } from "../respositories/user.repository.js";
+import { newToken } from "../config/auth.js";
 
 export const userServiceCreate = async (userData) => {
   const password = userData.password;
@@ -24,13 +25,23 @@ export const userServiceCreate = async (userData) => {
 
 export const userServiceLogin = async (login) => {
   const { email, password } = login;
-  const data = await userRepositoryLogin(email);
 
-  if (data !== null) {
+  try {
+    const data = await userRepositoryLogin(email);
     const userData = data.dataValues;
     const isPassword = await bcrypt.compare(password, userData.password);
 
-  }
+    if (isPassword) {
+      const token = await newToken(userData.id);
+      return { token };
+    } else {
+      throw new Error("Senha invalida");
+    }
+  } catch (err) {
+    if (err.message.startsWith("Cannot read properties of null")) {
+      throw new Error("Email não cadastrado");
+    }
 
-  throw new Error("Email não cadastrado");
+    throw new Error(err.message);
+  }
 };
