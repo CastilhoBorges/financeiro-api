@@ -1,7 +1,8 @@
 import bcrypt from "bcrypt";
-import { createUserRepository } from "../respositories/user.repository.js";
+import { userRepositoryCreate } from "../respositories/user.repository.js";
+import { userRepositoryLogin } from "../respositories/user.repository.js";
 
-export const createUserService = async (userData) => {
+export const userServiceCreate = async (userData) => {
   const password = userData.password;
 
   const saltRounds = 10;
@@ -9,7 +10,7 @@ export const createUserService = async (userData) => {
   const user = { ...userData, password: hashedPassword };
 
   try {
-    return await createUserRepository(user);
+    return await userRepositoryCreate(user);
   } catch (err) {
     if (err.errors[0].message === "username must be unique") {
       throw new Error("Usuario ja cadastrado");
@@ -19,4 +20,17 @@ export const createUserService = async (userData) => {
       throw new Error("Email ja cadastrado");
     }
   }
+};
+
+export const userServiceLogin = async (login) => {
+  const { email, password } = login;
+  const data = await userRepositoryLogin(email);
+
+  if (data !== null) {
+    const userData = data.dataValues;
+    const isPassword = await bcrypt.compare(password, userData.password);
+
+  }
+
+  throw new Error("Email não cadastrado");
 };
