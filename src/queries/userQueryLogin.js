@@ -5,6 +5,6 @@ export const userQueryLogin = async (email) => {
     where: {
       email: email,
     },
-    attributes: ["id", "email", "password"],
+    attributes: ["userId", "email", "password"],
   });
 };
