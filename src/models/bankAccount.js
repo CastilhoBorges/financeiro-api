@@ -1,8 +1,8 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../config/database.js";
-import { Accounts } from "./accounts.js";
+import Accounts from "./accounts.js";
 
-export const BankAccount = sequelize.define("BankAccount", {
+const BankAccount = sequelize.define("BankAccount", {
   bankAccountId: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
@@ -44,3 +44,8 @@ export const BankAccount = sequelize.define("BankAccount", {
     allowNull: true,
   },
 });
+
+Accounts.hasMany(BankAccount, { foreignKey: "accountId" });
+BankAccount.belongsTo(Accounts, { foreignKey: "accountId" });
+
+export default BankAccount;

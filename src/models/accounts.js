@@ -1,8 +1,8 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../config/database.js";
-import { User } from "./users.js";
+import User from "./users.js";
 
-export const Accounts = sequelize.define("Account", {
+const Accounts = sequelize.define("Account", {
   accountId: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
@@ -22,3 +22,8 @@ export const Accounts = sequelize.define("Account", {
     defaultValue: 0,
   },
 });
+
+User.hasOne(Accounts, { foreignKey: "userId" });
+Accounts.belongsTo(User, { foreignKey: "userId" });
+
+export default Accounts;

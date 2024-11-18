@@ -5,7 +5,7 @@ import { newToken } from "../config/auth.js";
 
 export const userServiceCreate = async (userData) => {
   const password = userData.password;
-  
+
   const saltRounds = 10;
   const hashedPassword = await bcrypt.hash(password, saltRounds);
   const user = { ...userData, password: hashedPassword };
@@ -25,19 +25,18 @@ export const userServiceCreate = async (userData) => {
 
 export const userServiceLogin = async (login) => {
   const { email, password } = login;
-  
+
   try {
     const data = await userRepositoryLogin(email);
-    const userData = data.dataValues;
-    const isPassword = await bcrypt.compare(password, userData.password);
+    const { userId, password: hash } = data.dataValues;
+    const isPassword = await bcrypt.compare(password, hash);
 
     if (isPassword) {
-      const token = await newToken(userData.id);
-      return { token };
-    } else {
-      throw new Error("Senha invalida");
+      const token = await newToken(userId);
+      return { token, userId };
     }
 
+    throw new Error("Senha invalida");
   } catch (err) {
     if (err.message.startsWith("Cannot read properties of null")) {
       throw new Error("Email não cadastrado");
