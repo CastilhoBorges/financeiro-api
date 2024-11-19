@@ -33,7 +33,7 @@ export const userServiceLogin = async (login) => {
 
     if (isPassword) {
       const token = await newToken(userId);
-      return { token, userId };
+      return { token };
     }
 
     throw new Error("Senha invalida");
