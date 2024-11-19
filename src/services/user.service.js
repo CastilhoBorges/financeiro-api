@@ -28,15 +28,15 @@ export const userServiceLogin = async (login) => {
 
   try {
     const data = await userRepositoryLogin(email);
-    const userData = data.dataValues;
-    const isPassword = await bcrypt.compare(password, userData.password);
+    const { userId, password: hash } = data.dataValues;
+    const isPassword = await bcrypt.compare(password, hash);
 
     if (isPassword) {
-      const token = await newToken(userData.id);
+      const token = await newToken(userId);
       return { token };
-    } else {
-      throw new Error("Senha invalida");
     }
+
+    throw new Error("Senha invalida");
   } catch (err) {
     if (err.message.startsWith("Cannot read properties of null")) {
       throw new Error("Email não cadastrado");
