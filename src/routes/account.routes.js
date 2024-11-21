@@ -1,9 +1,8 @@
 import { ROUTER } from "../utils/router.constants.js";
-import { accounts } from "../controllers/account.controller.js";
-import { authMiddleware } from "../middlewares/authMiddleware.js";
+import { accountControllerData } from "../controllers/account.controller.js";
 
 const account = ROUTER;
 
-account.get("/", authMiddleware, accounts);
+account.get("/", accountControllerData);
 
 export { account };
