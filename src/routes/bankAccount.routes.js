@@ -1,8 +1,8 @@
-import { ROUTER } from "../utils/router.constants.js";
+import { ROUTER } from "../utils/constants.js";
 import { bankControllerCreate } from "../controllers/bank.controller.js";
 
 const bankAccount = ROUTER;
 
-bankAccount.post("/create", bankControllerCreate);
+bankAccount.post("/create/:accountId", bankControllerCreate);
 
 export { bankAccount };
