@@ -1,5 +1,12 @@
 import { bankServiceCreate } from "../services/bank.service.js";
 
 export const bankControllerCreate = async (req, res) => {
-  res.send("Rota OK");
+  try {
+    const request = req;
+    const isCreate = await bankServiceCreate(request);
+    res.json({ isCreate });
+  } catch (err) {
+    console.log(err);
+    res.send(err);
+  }
 };

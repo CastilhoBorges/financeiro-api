@@ -1,12 +1,11 @@
-import { accountServiceData } from "../services/account.service.js";
+import { accountServiceAccountId } from "../services/account.service.js";
 
-export const accountControllerData = async (req, res) => {
+export const accountControllerAccountId = async (req, res) => {
   const userId = req.user[0].id;
   
   try {
-    const data = await accountServiceData(userId);
-    console.log(res);
-    res.json({ data });
+    const accountId = await accountServiceAccountId(userId);
+    res.json(accountId);
   } catch (err) {
     res.send(err);
   }
