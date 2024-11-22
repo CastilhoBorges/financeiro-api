@@ -8,7 +8,7 @@ const privateKey = new TextEncoder().encode(process.env.JWT_SECRET);
 export const auth = {
   secret: privateKey,
   algorithm: "HS256",
-  expiresIn: "1h",
+  expiresIn: "2h",
 };
 
 export const newToken = (userId) => {
