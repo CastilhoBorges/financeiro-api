@@ -1,4 +1,4 @@
-import { ROUTER } from "../utils/router.constants.js";
+import { ROUTER } from "../utils/constants.js";
 import { authMiddleware } from "../middlewares/authMiddleware.js";
 import { user } from "./user.routes.js";
 import { account } from "./account.routes.js";

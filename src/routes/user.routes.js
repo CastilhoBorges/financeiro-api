@@ -1,4 +1,4 @@
-import { ROUTER } from "../utils/router.constants.js";
+import { ROUTER } from "../utils/constants.js";
 import { userControllerCreate } from "../controllers/user.controller.js";
 import { userControllerLogin } from "../controllers/user.controller.js";
 

@@ -1,8 +1,8 @@
-import { ROUTER } from "../utils/router.constants.js";
-import { accountControllerData } from "../controllers/account.controller.js";
+import { ROUTER } from "../utils/constants.js";
+import { accountControllerAccountId } from "../controllers/account.controller.js";
 
 const account = ROUTER;
 
-account.get("/", accountControllerData);
+account.get("/", accountControllerAccountId);
 
 export { account };
